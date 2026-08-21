@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   let col = null;
   try {
     const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/public_collections?id=eq.${encodeURIComponent(id)}&select=id,name,items,cover_img,desc`,
+      `${SUPABASE_URL}/rest/v1/public_collections?id=eq.${encodeURIComponent(id)}&select=id,name,items,cover_img,share_card_img,desc`,
       { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
     );
     const data = await r.json();
@@ -39,7 +39,10 @@ export default async function handler(req, res) {
   const items = col.items || [];
   const count = items.length;
   const name = col.name || 'K-POP UNIVERSE 컬렉션';
-  const image = col.cover_img || (items[0] && items[0].thumb) || `${SITE}/og-image.png`;
+  // share_card_img: 앱이 만든 브랜드 카드(공유 버튼 누를 때 Supabase Storage에 업로드해둔 것) — 있으면
+  // 최우선. 아직 아무도 공유 버튼을 안 눌러본 컬렉션(share_card_img 없음)은 커스텀 표지 → 첫 영상
+  // 썸네일 순으로 폴백(2026-08-21).
+  const image = col.share_card_img || col.cover_img || (items[0] && items[0].thumb) || `${SITE}/og-image.png`;
   const desc = col.desc || `${count}개 영상 · K-POP UNIVERSE에서 이 컬렉션을 확인해보세요`;
 
   const html = `<!DOCTYPE html>
