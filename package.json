@@ -1,0 +1,6 @@
+{
+  "name": "kpopuniverse-share",
+  "version": "1.0.0",
+  "private": true,
+  "description": "K-POP UNIVERSE 공유 링크 미리보기(OG 태그) 전용 서버리스 함수 — kpop-universe.kr(GitHub Pages, 정적)는 요청마다 다른 og:image를 못 내려줘서, share.kpop-universe.kr 서브도메인으로 이 프로젝트를 따로 Vercel에 배포한다."
+}

@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/col/:id", "destination": "/api/col/:id" }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "https://kpop-universe.kr/", "permanent": false }
+  ]
+}
