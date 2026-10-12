@@ -30,10 +30,12 @@ const BANNED_VIDEO_NAMES_GLOBAL = ['seungri', '태일', 'taeil', 'himchan', '종
 // 영문만으로 된 이름은 단어 경계를 붙인다(부분 일치 오탐 방지) — index.html의 _bannedGlobalRe와 동일 규칙
 const BANNED_GLOBAL_RE = new RegExp(
   BANNED_VIDEO_NAMES_GLOBAL.map(n => (/^[\x20-\x7E]+$/.test(n) ? '\\b' + n + '\\b' : n)).join('|'), 'i');
-const FANCAM_BRAND_RE = /직캠|팬캠|페이스캠|풀캠|세로캠|얼빡|입덕|팔로우캠|원픽캠|보컬캠|보이스캠|최애캠|앵콜캠|단독샷|안방\s*1\s*열|포커스캠|개인캠|멤버캠|FAN\s*CAM|FACE\s*CAM|FULL\s*CAM|VOICE\s*CAM|PICK\s*CAM|FOCUS\s*CAM|SOLO\s*CAM|MEMBER\s*CAM|VERTICAL\s*CAM|UNFILTERED\s*CAM|CLOSE\s*UP\s*CAM/i;
+const FANCAM_BRAND_RE = /직캠|팬캠|페이스캠|풀캠|세로캠|얼빡|입덕직캠|팔로우캠|원픽캠|보컬캠|보이스캠|최애캠|앵콜캠|단독샷|안방\s*1\s*열|포커스캠|개인캠|멤버캠|FAN\s*CAM|FACE\s*CAM|FULL\s*CAM|VOICE\s*CAM|PICK\s*CAM|FOCUS\s*CAM|SOLO\s*CAM|MEMBER\s*CAM|VERTICAL\s*CAM|UNFILTERED\s*CAM|CLOSE\s*UP\s*CAM/i;
 // 2026-09-30: 화면(index.html _FANCAM_PROMO_RE)이 09-26에 "시즌N EP.N 예능 에피소드 제외"를 추가했는데 여기만 안 따라와서
 // 스냅샷과 화면 차트가 달라졌다(→ 거짓 NEW 배지 원인). parity 테스트가 CI에서 이 레포를 못 봐 스킵되던 것도 같이 고침.
-const FANCAM_PROMO_RE = /비하인드|보고서|메이킹|예고|티저|리액션|코멘터리|BEHIND|MAKING|TEASER|REACTION|COMMENTARY|시즌\s*\d+\s*EP\.?\s*\d+/i;
+// 2026-10-12: 화면이 09-30에 공항·생일 기념 직캠 제외 + '입덕'→'입덕직캠'으로 좁힌 걸 또 못 따라왔다(parity 테스트 빨간불).
+// ⚠️ index.html의 _FANCAM_BRAND_RE/_FANCAM_PROMO_RE를 바꾸면 여기도 같이 — tests/chart-snapshot-parity.test.js가 대조한다.
+const FANCAM_PROMO_RE = /비하인드|보고서|메이킹|예고|티저|리액션|코멘터리|BEHIND|MAKING|TEASER|REACTION|COMMENTARY|시즌\s*\d+\s*EP\.?\s*\d+|공항|생일\s*기념/i;
 
 // 대괄호 **밖의** 해시태그만 떼어낸다 — 음방명이 해시태그로만 달린 홍보 영상이 직캠으로 잡히는 걸 막되,
 // 제목 본문의 [쇼챔1분직캠] 같은 진짜 브랜드 표기는 살린다(index.html _fancamStripLooseHashtags와 동일).
