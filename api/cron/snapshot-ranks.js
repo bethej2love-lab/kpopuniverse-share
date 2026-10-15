@@ -23,7 +23,7 @@
 //    주석 참고. published_at이 스냅샷 날짜 이후인 영상만 NEW로 본다.)
 
 // ── index.html에서 그대로 옮긴 상수/판정 ──────────────────────────────────
-const LIVE_EXCLUDE = ['엠카드림', '비하인드', 'behind'];            // _LIVE_EXCLUDE
+const LIVE_EXCLUDE = ['엠카드림', '비하인드', 'behind', '생일 라이브', '생일라이브', 'birthday live', '실시간 라이브'];            // _LIVE_EXCLUDE
 const STAGE_EXCLUDE_FORMATS = ['안무영상'];                          // _STAGE_EXCLUDE_FORMATS
 const SHORT_CLIP_SEC = 90;                                           // _SHORT_CLIP_SEC
 const BANNED_VIDEO_NAMES_GLOBAL = ['seungri', '태일', 'taeil', 'himchan', '종훈', 'jonghun', 'kris', '용준형', 'yong jun hyung', 'yong jun hyeong', 'yongjunhyung'];
