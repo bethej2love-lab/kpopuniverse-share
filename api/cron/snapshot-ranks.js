@@ -100,12 +100,17 @@ export async function fetchPool(SUPABASE_URL, headers, sinceDate, limit) {
 
 export default async function handler(req, res) {
   const CRON_SECRET = process.env.CRON_SECRET;
-  if (CRON_SECRET) {
-    const auth = req.headers['authorization'];
-    if (auth !== `Bearer ${CRON_SECRET}`) {
-      res.status(401).json({ error: 'unauthorized' });
-      return;
-    }
+  // This endpoint writes with the Supabase service-role key.  Do not make the
+  // authentication optional: a missing Vercel environment variable must fail
+  // closed rather than turning the endpoint into a public write trigger.
+  if (!CRON_SECRET) {
+    res.status(500).json({ error: 'CRON_SECRET not configured' });
+    return;
+  }
+  const auth = req.headers['authorization'];
+  if (auth !== `Bearer ${CRON_SECRET}`) {
+    res.status(401).json({ error: 'unauthorized' });
+    return;
   }
 
   const SUPABASE_URL = process.env.SUPABASE_URL || 'https://dukgguehegnembimqvkm.supabase.co';
