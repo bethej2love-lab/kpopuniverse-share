@@ -1,11 +1,15 @@
 {
   "rewrites": [
-    { "source": "/col/:id", "destination": "/api/col/:id" }
+    {
+      "source": "/col/:id",
+      "destination": "/api/col/:id"
+    }
   ],
   "redirects": [
-    { "source": "/", "destination": "https://kpop-universe.kr/", "permanent": false }
-  ],
-  "crons": [
-    { "path": "/api/cron/snapshot-ranks", "schedule": "5 0 * * *" }
+    {
+      "source": "/",
+      "destination": "https://kpop-universe.kr/",
+      "permanent": false
+    }
   ]
 }

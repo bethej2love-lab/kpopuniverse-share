@@ -7,7 +7,7 @@
 | 경로 | 역할 |
 | --- | --- |
 | `api/col/[id].js` | 공개 컬렉션을 조회해 Open Graph/Twitter 메타태그를 응답하고 앱으로 이동시킨다. |
-| `api/cron/snapshot-ranks.js` | 매일 두 차트의 순위를 Supabase `rank_snapshots`에 upsert한다. |
+| `api/cron/snapshot-ranks.js` | (2026-11-05 은퇴 — 크론 해제) 예전 주간 직캠·월간 퍼포먼스 순위 기록. 이제 메인 레포 `tools/snapshot_charts.cjs`(GitHub Actions)가 앱 함수 그대로 기록한다. |
 | `vercel.json` | `/col/:id` 라우팅, 루트 리다이렉트, Cron 일정을 정의한다. |
 
 ## 배포 환경변수
